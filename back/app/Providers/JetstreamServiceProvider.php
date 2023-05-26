@@ -33,7 +33,7 @@ class JetstreamServiceProvider extends ServiceProvider
         //check user email, password, and allow only type "doctor" login
         Fortify::authenticateUsing(function(Request $request){
             $user = User::where('email', $request->email)->first();
-            if($user && Hash::check($request->password, $user->password) && $user->type == 'doctor'){
+            if($user && Hash::check($request->password, $user->password) && $user->type == 'techer'){
                 return $user;
             }
         });

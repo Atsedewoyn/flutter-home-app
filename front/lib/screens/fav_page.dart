@@ -34,10 +34,10 @@ class _FavPageState extends State<FavPage> {
               child: Consumer<AuthModel>(
                 builder: (context, auth, child) {
                   return ListView.builder(
-                    itemCount: auth.getFavDoc.length,
+                    itemCount: auth.getFavteach.length,
                     itemBuilder: (context, index) {
-                      return DoctorCard(
-                        doctor: auth.getFavDoc[index],
+                      return TecherCard(
+                        techer: auth.getFavteach[index],
                         //show fav icon
                         isFav: true,
                       );

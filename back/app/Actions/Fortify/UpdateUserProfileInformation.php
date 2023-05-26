@@ -2,7 +2,7 @@
 
 namespace App\Actions\Fortify;
 
-use App\Models\Doctor;
+use App\Models\Techer;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -39,7 +39,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             ])->save();
         }
 
-        $doctor = Doctor::where('teach_id', $user->id)
+        $Techer = Techer::where('teach_id', $user->id)
         ->update([
             'experience' => $input['experience'],
             'bio_data' => $input['bio_data'],

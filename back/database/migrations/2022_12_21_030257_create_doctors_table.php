@@ -16,15 +16,15 @@ return new class extends Migration
         //create a database table for doctor
         //and this doctor table is refer to User table
         //when a new doctor registered, the doctor details will be created as well
-        Schema::create('doctors', function (Blueprint $table) {
+        Schema::create('techers', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('doc_id')->unique();
+            $table->unsignedInteger('teach_id')->unique();
             $table->string('category')->nullable();
-            $table->unsignedInteger('patients')->nullable();
+            $table->unsignedInteger('students')->nullable();
             $table->unsignedInteger('experience')->nullable();
             $table->longText('bio_data')->nullable();
             $table->string('status')->nullable();
-            $table->foreign('doc_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('teach_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

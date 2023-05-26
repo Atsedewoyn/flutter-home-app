@@ -1,9 +1,9 @@
-import 'package:doctor_appointment_app/main_layout.dart';
-import 'package:doctor_appointment_app/models/auth_model.dart';
-import 'package:doctor_appointment_app/screens/auth_page.dart';
-import 'package:doctor_appointment_app/screens/booking_page.dart';
-import 'package:doctor_appointment_app/screens/success_booked.dart';
-import 'package:doctor_appointment_app/utils/config.dart';
+import 'package:home_tutor_app/main_layout.dart';
+import 'package:home_tutor_app/models/auth_model.dart';
+import 'package:home_tutor_app/screens/auth_page.dart';
+import 'package:home_tutor_app/screens/booking_page.dart';
+import 'package:home_tutor_app/screens/success_booked.dart';
+import 'package:home_tutor_app/utils/config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       create: (context) => AuthModel(),
       child: MaterialApp(
         navigatorKey: navigatorKey,
-        title: 'Flutter Teacher App',
+        title: 'Home tutor App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           //pre-define input decoration

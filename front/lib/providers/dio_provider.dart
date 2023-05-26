@@ -18,7 +18,11 @@ class DioProvider {
         return false;
       }
     } catch (error) {
-      return error;
+      if (error is DioError) {
+        return 'Request failed with status code ${error.response?.statusCode}';
+      } else {
+        return 'Error: $error';
+      }
     }
   }
 
@@ -26,7 +30,10 @@ class DioProvider {
   Future<dynamic> getUser(String token) async {
     try {
       var user = await Dio().get('http://127.0.0.1:8000/api/user',
-          options: Options(headers: {'Authorization': 'Bearer $token'}));
+          options: Options(headers: {
+            'Authorization': 'Bearer $token',
+            'Content-Type': 'application/json'
+          }));
       if (user.statusCode == 200 && user.data != '') {
         return json.encode(user.data);
       }
@@ -47,16 +54,20 @@ class DioProvider {
         return false;
       }
     } catch (error) {
-      return error;
+      if (error is DioError) {
+        return false;
+      } else {
+        throw error;
+      }
     }
   }
 
   //store booking details
   Future<dynamic> bookAppointment(
-      String date, String day, String time, int doctor, String token) async {
+      String date, String day, String time, int teacher, String token) async {
     try {
       var response = await Dio().post('http://127.0.0.1:8000/api/book',
-          data: {'date': date, 'day': day, 'time': time, 'doctor_id': doctor},
+          data: {'date': date, 'day': day, 'time': time, 'doctor_id': teacher},
           options: Options(headers: {'Authorization': 'Bearer $token'}));
 
       if (response.statusCode == 200 && response.data != '') {
@@ -87,14 +98,14 @@ class DioProvider {
 
   //store rating details
   Future<dynamic> storeReviews(
-      String reviews, double ratings, int id, int doctor, String token) async {
+      String reviews, double ratings, int id, int techer, String token) async {
     try {
       var response = await Dio().post('http://127.0.0.1:8000/api/reviews',
           data: {
             'ratings': ratings,
             'reviews': reviews,
             'appointment_id': id,
-            'doctor_id': doctor
+            'doctor_id': techer
           },
           options: Options(headers: {'Authorization': 'Bearer $token'}));
 

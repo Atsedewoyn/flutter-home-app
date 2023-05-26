@@ -16,13 +16,13 @@ class DocsController extends Controller
      */
     public function index()
     {
-        //get doctor's appointment, patients and display on dashboard
-        $doctor = Auth::user();
-        $appointments = Appointments::where('teach_id', $doctor->id)->where('status', 'upcoming')->get();
-        $reviews = Reviews::where('teach_id', $doctor->id)->where('status', 'active')->get();
+        //get techer's appointment, patients and display on dashboard
+        $techer = Auth::user();
+        $appointments = Appointments::where('teach_id', $techer->id)->where('status', 'upcoming')->get();
+        $reviews = Reviews::where('teach_id', $techer->id)->where('status', 'active')->get();
 
         //return all data to dashboard
-        return view('dashboard')->with(['teacher'=>$doctor, 'appointments'=>$appointments, 'reviews'=>$reviews]);
+        return view('dashboard')->with(['techer'=>$techer, 'appointments'=>$appointments, 'reviews'=>$reviews]);
     }
 
     /**

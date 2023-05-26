@@ -8,23 +8,25 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../components//custom_appbar.dart';
 
-class DoctorDetails extends StatefulWidget {
-  const DoctorDetails({Key? key, required this.doctor, required this.isFav})
+// ignore: camel_case_types
+class TecherDetails extends StatefulWidget {
+  const TecherDetails({Key? key, required this.techer, required this.isFav})
       : super(key: key);
-  final Map<String, dynamic> doctor;
+  final Map<String, dynamic> techer;
   final bool isFav;
 
   @override
-  State<DoctorDetails> createState() => _DoctorDetailsState();
+  State<TecherDetails> createState() => _TecherDetailsState();
 }
 
-class _DoctorDetailsState extends State<DoctorDetails> {
-  Map<String, dynamic> doctor = {};
+// ignore: camel_case_types
+class _TecherDetailsState extends State<TecherDetails> {
+  Map<String, dynamic> techer = {};
   bool isFav = false;
 
   @override
   void initState() {
-    doctor = widget.doctor;
+    techer = widget.techer;
     isFav = widget.isFav;
     super.initState();
   }
@@ -33,23 +35,23 @@ class _DoctorDetailsState extends State<DoctorDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        appTitle: 'Doctor Details',
+        appTitle: 'Teacher Details',
         icon: const FaIcon(Icons.arrow_back_ios),
         actions: [
           //Favarite Button
           IconButton(
-            //press this button to add/remove favorite doctor
+            //press this button to add/remove favorite techer
             onPressed: () async {
               //get latest favorite list from auth model
               final list =
                   Provider.of<AuthModel>(context, listen: false).getFav;
 
               //if doc id is already exist, mean remove the doc id
-              if (list.contains(doctor['teach_id'])) {
-                list.removeWhere((id) => id == doctor['teach_id']);
+              if (list.contains(techer['teach_id'])) {
+                list.removeWhere((id) => id == techer['teach_id']);
               } else {
-                //else, add new doctor to favorite list
-                list.add(doctor['teach_id']);
+                //else, add new techer to favorite list
+                list.add(techer['teach_id']);
               }
 
               //update the list into auth model and notify all widgets
@@ -81,11 +83,11 @@ class _DoctorDetailsState extends State<DoctorDetails> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            AboutDoctor(
-              doctor: doctor,
+            Abouttecher(
+              techer: techer,
             ),
             DetailBody(
-              doctor: doctor,
+              techer: techer,
             ),
             const Spacer(),
             Padding(
@@ -95,7 +97,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                 title: 'Book Appointment',
                 onPressed: () {
                   Navigator.of(context).pushNamed('booking_page',
-                      arguments: {"teach_id": doctor['teach_id']});
+                      arguments: {"teach_id": techer['teach_id']});
                 },
                 disable: false,
               ),
@@ -107,10 +109,10 @@ class _DoctorDetailsState extends State<DoctorDetails> {
   }
 }
 
-class AboutDoctor extends StatelessWidget {
-  const AboutDoctor({Key? key, required this.doctor}) : super(key: key);
+class Abouttecher extends StatelessWidget {
+  const Abouttecher({Key? key, required this.techer}) : super(key: key);
 
-  final Map<dynamic, dynamic> doctor;
+  final Map<dynamic, dynamic> techer;
 
   @override
   Widget build(BuildContext context) {
@@ -122,13 +124,13 @@ class AboutDoctor extends StatelessWidget {
           CircleAvatar(
             radius: 65.0,
             backgroundImage: NetworkImage(
-              " 'http://127.0.0.1:8000/' + '${doctor['teacher_profile']}' ",
+              " 'http://127.0.0.1:8000/' + '${techer['teacher_profile']}' ",
             ),
             backgroundColor: Colors.white,
           ),
           Config.spaceMedium,
           Text(
-            "Mr. ${doctor['teacher_name']}",
+            "Mr. ${techer['teacher_name']}",
             style: const TextStyle(
               color: Colors.black,
               fontSize: 24.0,
@@ -169,8 +171,8 @@ class AboutDoctor extends StatelessWidget {
 }
 
 class DetailBody extends StatelessWidget {
-  const DetailBody({Key? key, required this.doctor}) : super(key: key);
-  final Map<dynamic, dynamic> doctor;
+  const DetailBody({Key? key, required this.techer}) : super(key: key);
+  final Map<dynamic, dynamic> techer;
 
   @override
   Widget build(BuildContext context) {
@@ -181,9 +183,9 @@ class DetailBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Config.spaceSmall,
-          DoctorInfo(
-            patients: doctor['patients'],
-            exp: doctor['experience'],
+          techerInfo(
+            patients: techer['patients'],
+            exp: techer['experience'],
           ),
           Config.spaceMedium,
           const Text(
@@ -192,7 +194,7 @@ class DetailBody extends StatelessWidget {
           ),
           Config.spaceSmall,
           Text(
-            'Mr. ${doctor['teacher_name']} is an experience ${doctor['category']} Specialist at Sarawak, graduated since 2008, and completed his/her training at Sungai Buloh General Hospital.',
+            'Mr. ${techer['teacher_name']} is an experience ${techer['category']} Specialist at Sarawak, graduated since 2008, and completed his/her training at Sungai Buloh General Hospital.',
             style: const TextStyle(
               fontWeight: FontWeight.w500,
               height: 1.5,
@@ -206,8 +208,8 @@ class DetailBody extends StatelessWidget {
   }
 }
 
-class DoctorInfo extends StatelessWidget {
-  const DoctorInfo({Key? key, required this.patients, required this.exp})
+class techerInfo extends StatelessWidget {
+  const techerInfo({Key? key, required this.patients, required this.exp})
       : super(key: key);
 
   final int patients;

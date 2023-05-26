@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:home_tutor_app/components/button.dart';
 import 'package:home_tutor_app/main.dart';
 import 'package:home_tutor_app/models/auth_model.dart';
@@ -81,11 +82,11 @@ class _LoginFormState extends State<LoginForm> {
                     //login here
                     final token = await DioProvider()
                         .getToken(_emailController.text, _passController.text);
-
                     // If the request was successful, token will contain the response data
 // otherwise, DioError will be thrown and caught in the catch block
                     if (token != null) {
                       //grab user data here
+
                       final SharedPreferences prefs =
                           await SharedPreferences.getInstance();
                       final tokenValue = prefs.getString('token') ?? '';
@@ -114,9 +115,13 @@ class _LoginFormState extends State<LoginForm> {
                         }
                       }
                     }
-                  } catch (e) {
-                    print('Error: $e');
-                    // Handle errors here
+                  } catch (error) {
+                    if (error is DioError) {
+                      print(
+                          'Request failed with status code ${error.response?.statusCode}');
+                    } else {
+                      print('Error: $error');
+                    }
                   }
                 },
               );

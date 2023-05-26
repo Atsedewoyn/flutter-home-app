@@ -6,10 +6,10 @@ import 'package:rating_dialog/rating_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppointmentCard extends StatefulWidget {
-  AppointmentCard({Key? key, required this.doctor, required this.color})
+  const AppointmentCard({Key? key, required this.techer, required this.color})
       : super(key: key);
 
-  final Map<String, dynamic> doctor;
+  final Map<String, dynamic> techer;
   final Color color;
 
   @override
@@ -36,7 +36,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
                 children: [
                   CircleAvatar(
                     backgroundImage: NetworkImage(
-                        "http://127.0.0.1:8000${widget.doctor['doctor_profile']}"), //insert doctor profile
+                        "http://127.0.0.1:8000${widget.techer['techer_profile']}"), //insert techer profile
                   ),
                   const SizedBox(
                     width: 10,
@@ -46,14 +46,14 @@ class _AppointmentCardState extends State<AppointmentCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Dr ${widget.doctor['doctor_name']}',
+                        'Mr. ${widget.techer['techer_name']}',
                         style: const TextStyle(color: Colors.white),
                       ),
                       const SizedBox(
                         height: 2,
                       ),
                       Text(
-                        widget.doctor['category'],
+                        widget.techer['category'],
                         style: const TextStyle(color: Colors.black),
                       )
                     ],
@@ -63,7 +63,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
               Config.spaceSmall,
               //Schedule info here
               ScheduleCard(
-                appointment: widget.doctor['appointments'],
+                appointment: widget.techer['appointments'],
               ),
               Config.spaceSmall,
               //action button
@@ -97,7 +97,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
                               return RatingDialog(
                                   initialRating: 1.0,
                                   title: const Text(
-                                    'Rate the Doctor',
+                                    'Rate the techer',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 25,
@@ -105,7 +105,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
                                     ),
                                   ),
                                   message: const Text(
-                                    'Please help us to rate our Doctor',
+                                    'Please help us to rate our techer',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 15,
@@ -126,10 +126,10 @@ class _AppointmentCardState extends State<AppointmentCard> {
                                         .storeReviews(
                                             response.comment,
                                             response.rating,
-                                            widget.doctor['appointments']
+                                            widget.techer['appointments']
                                                 ['id'], //this is appointment id
-                                            widget.doctor[
-                                                'doc_id'], //this is doctor id
+                                            widget.techer[
+                                                'teache_id'], //this is techer id
                                             token);
 
                                     //if successful, then refresh

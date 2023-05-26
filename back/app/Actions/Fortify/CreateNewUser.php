@@ -2,7 +2,7 @@
 
 namespace App\Actions\Fortify;
 
-use App\Models\Doctor;
+use App\Models\Techer;
 use App\Models\User;
 use App\Models\UserDetails;
 use Illuminate\Support\Facades\Hash;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
 
-//this is to register new user/doctor
+//this is to register new user/techer
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -34,12 +34,12 @@ class CreateNewUser implements CreatesNewUsers
         $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
-            'type' => 'doctor',
+            'type' => 'techer',
             'password' => Hash::make($input['password']),
         ]);
 
-        $doctorInfo = Doctor::create([
-            'doc_id' => $user->id,
+        $techerInfo = Techer::create([
+            'teach_id' => $user->id,
             'status' => 'active'
         ]);
 

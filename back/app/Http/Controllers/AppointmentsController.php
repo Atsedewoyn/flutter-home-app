@@ -18,16 +18,16 @@ class AppointmentsController extends Controller
     {
         //retrieve all appointments from the user
         $appointment = Appointments::where('user_id', Auth::user()->id)->get();
-        $doctor = User::where('type', 'teacher')->get();
+        $techer = User::where('type', 'techer')->get();
 
-        //sorting appointment and doctor details
+        //sorting appointment and techer details
         //and get all related appointment
         foreach($appointment as $data){
-            foreach($doctor as $info){
-                $details = $info->doctor;
+            foreach($techer as $info){
+                $details = $info->techer;
                 if($data['teach_id'] == $info['id']){
-                    $data['teacher_name'] = $info['name'];
-                    $data['teacher_profile'] = $info['profile_photo_url']; //typo error found
+                    $data['techer_name'] = $info['name'];
+                    $data['techer_profile'] = $info['profile_photo_url']; //typo error found
                     $data['category'] = $details['category'];
                 }
             }
@@ -57,7 +57,7 @@ class AppointmentsController extends Controller
         //this controller is to store booking details post from mobile app
         $appointment = new Appointments();
         $appointment->user_id = Auth::user()->id;
-        $appointment->doc_id = $request->get('teach_id');
+        $appointment->teach_id = $request->get('teach_id');
         $appointment->date = $request->get('date');
         $appointment->day = $request->get('day');
         $appointment->time = $request->get('time');

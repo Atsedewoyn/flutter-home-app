@@ -15,31 +15,31 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Map<String, dynamic> user = {};
-  Map<String, dynamic> doctor = {};
+  Map<String, dynamic> teacher = {};
   List<dynamic> favList = [];
-  List<Map<String, dynamic>> medCat = [
+  List<Map<String, dynamic>> teachCat = [
     {
-      "icon": FontAwesomeIcons.userDoctor,
+      "icon": FontAwesomeIcons.book,
       "category": "General",
     },
     {
-      "icon": FontAwesomeIcons.heartPulse,
+      "icon": FontAwesomeIcons.book,
       "category": "cemistry",
     },
     {
-      "icon": FontAwesomeIcons.lungs,
+      "icon": FontAwesomeIcons.book,
       "category": "Maths",
     },
     {
-      "icon": FontAwesomeIcons.hand,
+      "icon": FontAwesomeIcons.book,
       "category": "Biology",
     },
     {
-      "icon": FontAwesomeIcons.personPregnant,
+      "icon": FontAwesomeIcons.book,
       "category": "Gyography",
     },
     {
-      "icon": FontAwesomeIcons.teeth,
+      "icon": FontAwesomeIcons.book,
       "category": "physics",
     },
   ];
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Config().init(context);
     user = Provider.of<AuthModel>(context, listen: false).getUser;
-    doctor = Provider.of<AuthModel>(context, listen: false).getAppointment;
+    teacher = Provider.of<AuthModel>(context, listen: false).getAppointment;
     favList = Provider.of<AuthModel>(context, listen: false).getFav;
 
     return Scaffold(
@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children:
-                              List<Widget>.generate(medCat.length, (index) {
+                              List<Widget>.generate(teachCat.length, (index) {
                             return Card(
                               margin: const EdgeInsets.only(right: 20),
                               color: Config.primaryColor,
@@ -112,14 +112,14 @@ class _HomePageState extends State<HomePage> {
                                       MainAxisAlignment.spaceAround,
                                   children: <Widget>[
                                     FaIcon(
-                                      medCat[index]['icon'],
+                                      teachCat[index]['icon'],
                                       color: Colors.white,
                                     ),
                                     const SizedBox(
                                       width: 20,
                                     ),
                                     Text(
-                                      medCat[index]['category'],
+                                      teachCat[index]['category'],
                                       style: const TextStyle(
                                         fontSize: 16,
                                         color: Colors.white,
@@ -141,9 +141,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Config.spaceSmall,
-                      doctor.isNotEmpty
+                      teacher.isNotEmpty
                           ? AppointmentCard(
-                              doctor: doctor,
+                              techer: teacher,
                               color: Config.primaryColor,
                             )
                           : Container(
@@ -177,9 +177,9 @@ class _HomePageState extends State<HomePage> {
                       Column(
                         children:
                             List.generate(user['teacher'].length, (index) {
-                          return DoctorCard(
-                            doctor: user['teacher'][index],
-                            //if lates fav list contains particular doctor id, then show fav icon
+                          return TecherCard(
+                            techer: user['teacher'][index],
+                            //if lates fav list contains particular teacher id, then show fav icon
                             isFav: favList.contains(
                                     user['teacher'][index]['teach_id'])
                                 ? true

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointments;
 use App\Models\User;
-use App\Models\Doctor;
+use App\Models\techer;
 use App\Models\UserDetails;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -20,24 +20,24 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $user = array(); //this will return a set of user and doctor data
+        $user = array(); //this will return a set of user and techer data
         $user = Auth::user();
-        $doctor = User::where('type', 'teacher')->get();
+        $techer = User::where('type', 'techer')->get();
         $details = $user->user_details;
-        $doctorData = Doctor::all();
+        $techerData = techer::all();
         //this is the date format without leading
         $date = now()->format('n/j/Y'); //change date format to suit the format in database
 
         //make this appointment filter only status is "upcoming"
         $appointment = Appointments::where('status', 'upcoming')->where('date', $date)->first();
 
-        //collect user data and all doctor details
-        foreach($doctorData as $data){
-            //sorting doctor name and doctor details
-            foreach($doctor as $info){
+        //collect user data and all techer details
+        foreach($techerData as $data){
+            //sorting techer name and techer details
+            foreach($techer as $info){
                 if($data['teach_id'] == $info['id']){
-                    $data['teacher_name'] = $info['name'];
-                    $data['teacher_profile'] = $info['profile_photo_url'];
+                    $data['techer_name'] = $info['name'];
+                    $data['techer_profile'] = $info['profile_photo_url'];
                     if(isset($appointment) && $appointment['teach_id'] == $info['id']){
                         $data['appointments'] = $appointment;
                     }
@@ -45,8 +45,8 @@ class UsersController extends Controller
             }
         }
 
-        $user['teacher'] = $doctorData;
-        $user['details'] = $details; //return user details here together with doctor list
+        $user['techer'] = $techerData;
+        $user['details'] = $details; //return user details here together with techer list
 
         return $user; //return all data
     }
@@ -99,10 +99,10 @@ class UsersController extends Controller
             'password'=>Hash::make($request->password),
         ]);
 
-        $userInfo = UserDetails::create([
-            'user_id'=>$user->id,
-            'status'=>'active',
-        ]);
+        // $userInfo = UserDetails::create([
+        //     'user_id'=>$user->id,
+        //     'status'=>'active',
+        // ]);
 
         return $user;
 
@@ -110,7 +110,7 @@ class UsersController extends Controller
     }
 
     /**
-     * update favorite doctor list
+     * update favorite techer list
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -123,7 +123,7 @@ class UsersController extends Controller
         $docList = json_encode($request->get('favList'));
 
         //update fav list into database
-        $saveFav->fav = $docList;  //and remember update this as well
+        $saveFav->fav = $techList;  //and remember update this as well
         $saveFav->save();
 
         return response()->json([
