@@ -1,7 +1,7 @@
-import 'package:doctor_appointment_app/components/appointment_card.dart';
-import 'package:doctor_appointment_app/components/teacher_card.dart';
-import 'package:doctor_appointment_app/models/auth_model.dart';
-import 'package:doctor_appointment_app/utils/config.dart';
+import 'package:home_tutor_app/components/appointment_card.dart';
+import 'package:home_tutor_app/components/teacher_card.dart';
+import 'package:home_tutor_app/models/auth_model.dart';
+import 'package:home_tutor_app/utils/config.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';

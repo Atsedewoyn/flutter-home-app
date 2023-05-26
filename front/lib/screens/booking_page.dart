@@ -1,9 +1,9 @@
-import 'package:doctor_appointment_app/components/button.dart';
-import 'package:doctor_appointment_app/components/custom_appbar.dart';
-import 'package:doctor_appointment_app/main.dart';
-import 'package:doctor_appointment_app/models/booking_datetime_converted.dart';
-import 'package:doctor_appointment_app/providers/dio_provider.dart';
-import 'package:doctor_appointment_app/utils/config.dart';
+import 'package:home_tutor_app/components/button.dart';
+import 'package:home_tutor_app/components/custom_appbar.dart';
+import 'package:home_tutor_app/main.dart';
+import 'package:home_tutor_app/models/booking_datetime_converted.dart';
+import 'package:home_tutor_app/providers/dio_provider.dart';
+import 'package:home_tutor_app/utils/config.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';

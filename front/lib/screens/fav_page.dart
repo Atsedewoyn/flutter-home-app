@@ -1,4 +1,4 @@
-import 'package:doctor_appointment_app/components/teacher_card.dart';
+import 'package:home_tutor_app/components/teacher_card.dart';
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 

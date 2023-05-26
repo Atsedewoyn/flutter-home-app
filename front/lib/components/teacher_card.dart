@@ -1,6 +1,6 @@
-import 'package:doctor_appointment_app/main.dart';
-import 'package:doctor_appointment_app/screens/teacher_detail.dart';
-import 'package:doctor_appointment_app/utils/config.dart';
+import 'package:home_tutor_app/main.dart';
+import 'package:home_tutor_app/screens/teacher_detail.dart';
+import 'package:home_tutor_app/utils/config.dart';
 import 'package:flutter/material.dart';
 
 class DoctorCard extends StatelessWidget {
